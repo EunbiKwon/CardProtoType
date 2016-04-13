@@ -1,6 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<CardData>
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<Data>
 	<Field Name="권은비" Cost="5" Speed="3" Atk="3" AtkType="1" Text="권은비다 눈물이 나온다"/>
 	<Field Name="곽창건" Cost="6" Speed="3" Atk="4" AtkType="2" Text="윽박지르는걸 좋아한다"/>
 	<Field Name="권용준" Cost="7" Speed="2" Atk="4" AtkType="1" Text="P다."/>
-</CardData>
+</Data>

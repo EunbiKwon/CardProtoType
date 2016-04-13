@@ -6,6 +6,7 @@ using System.Xml; // Xml
 public class CardManager : MonoBehaviour
 {
     // Singleton
+    /*
     private static CardManager instance;
 
     public static CardManager getInstance
@@ -19,6 +20,7 @@ public class CardManager : MonoBehaviour
             return instance;
         }
     }
+    */
 
     public List<CardObject> Player_Card = new List<CardObject>();
     public List<CardObject> Another_Card = new List<CardObject>();  // Temp
@@ -34,21 +36,25 @@ public class CardManager : MonoBehaviour
         TextAsset data_xml = (TextAsset)Resources.Load(filepath, typeof(TextAsset));
         XmlDocument Document = new XmlDocument();
         Document.LoadXml(data_xml.text);
-
-        XmlElement InfoListElement = Document["Data"];
+        
+        XmlElement InfoListElement = Document["CardData"];
+        //XmlNode root = Document.DocumentElement;
 
         List<CardObject> SetList = new List<CardObject>(); // 사용자 카드
         List<CardObject> CardList = new List<CardObject>(); // 카드 리스트
+
+        Debug.Log(InfoListElement.ChildNodes[0].InnerText);
 
         // Card Data Init
         CardList = DataInfoRead("CardData");
 
         // Player Card Info Setting
-        for (int i = 0; i < InfoListElement.ChildNodes.Count; i++)
+        //for (int i = 0; i < InfoListElement.ChildNodes.Count; i++)
+        foreach (XmlElement InfoElement in InfoListElement.ChildNodes)
         {
             CardObject Info = new CardObject();
             // Card name list Input
-            Info.Name = System.Convert.ToString(InfoListElement.GetAttribute("Name"));
+            Info.Name = InfoListElement.GetAttribute("Name");
 
             // Data Input
             for(int j = 0; j < CardList.Count; j++)
@@ -73,14 +79,15 @@ public class CardManager : MonoBehaviour
         Document.LoadXml(data_xml.text);
 
         XmlElement InfoListElement = Document["Data"];
+        //XmlNode root = Document.DocumentElement;
 
         List<CardObject> CardList = new List<CardObject>();
 
-        //foreach (XmlElement InfoElement in InfoListElement.ChildNodes)
-        for (int i = 0; i < InfoListElement.ChildNodes.Count; i++)
+        //for (int i = 0; i < InfoListElement.ChildNodes.Count; i++)
+        foreach (XmlElement InfoElement in InfoListElement.ChildNodes)
         {
             CardObject Info = new CardObject();
-            Info.Name = System.Convert.ToString(InfoListElement.GetAttribute("Name"));
+            Info.Name = InfoListElement.GetAttribute("Name");
             Info.Cost = System.Convert.ToInt32(InfoListElement.GetAttribute("Cost"));
             Info.Speed = System.Convert.ToInt32(InfoListElement.GetAttribute("Speed"));
             Info.Atk = System.Convert.ToInt32(InfoListElement.GetAttribute("Atk"));

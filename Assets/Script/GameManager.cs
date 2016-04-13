@@ -7,10 +7,13 @@ public class GameManager : MonoBehaviour
     const int ROUND = 6;
     const int SPEED = 6;
 
+    private int Player_Cost;
+    private int Another_Cost;
+
     private CardObject Player_Main;     // Player Main Character
     private CardObject Another_Main;    // Other Main Character
-    private List<CardObject> Player_List = new List<CardObject>();   // Player field card
-    private List<CardObject> Another_List = new List<CardObject>();   // Other field card
+    private CardObject[] Player_List = new CardObject[5];   // Player field card
+    private CardObject[] Another_List = new CardObject[5];  // Other field card
 
     void Awake ()
     {
@@ -33,25 +36,52 @@ public class GameManager : MonoBehaviour
 
     void Init()
     {
+        Player_Cost = 0;
+        Another_Cost = 0;
         Player_Main = new CardObject();
         Another_Main = new CardObject();
 
         // 플레이어 카드 선택 일단 보류
         // 프로토타입이라 일단 리스트 가져오겟슴
-        Player_List = CardManager.getInstance.Player_Card;
-        Another_List = CardManager.getInstance.Another_Card;
+        //Player_List = CardManager.getInstance.Player_Card;
+        //Another_List = CardManager.getInstance.Another_Card;
     }
 
     void Battle(int _round)
     {
         for(int i = 0; i < SPEED; i++)
         {
-            // 선공 안정해서 일단 플레이어부터 공격
-            if(0 == (Player_List[i].Speed % (i+1)))
+            for (int j = 0; j < 5; j++)
             {
+                // 똑같으면 확률
+                if (null != Player_List[j].Name && null != Another_List[j].Name)
+                {
+                    if(0 == Player_List[j].sCount && 0 == Another_List[j].sCount)
+                    {
+                        int rand = Random.Range(0, 1);
+                        /*
+                        if (0 == rand)
+                            Player_List[j];
+                        else
+                            Another_List[j];
+                        */
+                    }
+                    //Player_List[j].sCount = Player_List[j].Speed;
+                }
 
+                if (null != Player_List[j].Name && 0 == Player_List[j].sCount)
+                {
+                    Player_List[j].sCount = Player_List[j].Speed;
+                }
+                else if (null != Player_List[j].Name)
+                {
+                    Player_List[j].sCount--;
+                }
+                else { }
             }
         }
+        ++Player_Cost;
+        ++Another_Cost;
     }
 
     void Change()

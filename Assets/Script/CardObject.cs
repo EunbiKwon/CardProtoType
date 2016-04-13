@@ -32,6 +32,12 @@ public class CardObject : MonoBehaviour
         get { return m_Speed; }
         set { m_Speed = Speed; }
     }
+    private int m_Count;
+    public int sCount
+    {
+        get { return m_Count; }
+        set { m_Count = sCount; }
+    }
     private string m_Name;
     public string Name
     {
