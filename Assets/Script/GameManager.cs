@@ -10,10 +10,37 @@ public class GameManager : MonoBehaviour
     private int Player_Cost;
     private int Another_Cost;
 
-    private CardObject Player_Main;     // Player Main Character
-    private CardObject Another_Main;    // Other Main Character
-    private CardObject[] Player_List = new CardObject[5];   // Player field card
-    private CardObject[] Another_List = new CardObject[5];  // Other field card
+    // GameObject
+    public GameObject PlayerMObj;
+    public GameObject AnotherMObj;
+    public GameObject[] PlayerLObj = new GameObject[5];
+    public GameObject[] AnotherLObj = new GameObject[5];
+
+    // CardInfo
+    public CardObject Player_Main;     // Player Main Character
+    public CardObject Another_Main;    // Other Main Character
+    public CardObject[] Player_List = new CardObject[5];   // Player field card
+    public CardObject[] Another_List = new CardObject[5];  // Other field card
+
+    private static GameManager instance;
+    public static GameManager Instance
+    {
+        get
+        {
+            if (instance == null)
+            {
+                instance = FindObjectOfType(typeof(GameManager)) as GameManager;
+            }
+
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("GameManager");
+                instance = obj.AddComponent<GameManager>() as GameManager;
+            }
+
+            return instance;
+        }
+    }
 
     void Awake ()
     {
@@ -54,7 +81,7 @@ public class GameManager : MonoBehaviour
             for (int j = 0; j < 5; j++)
             {
                 // 똑같으면 확률
-                if (null != Player_List[j].Name && null != Another_List[j].Name)
+                if (null != Player_List[j] && null != Another_List[j])
                 {
                     if(0 == Player_List[j].sCount && 0 == Another_List[j].sCount)
                     {
