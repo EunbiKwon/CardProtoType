@@ -70,6 +70,16 @@ public class GameManager : MonoBehaviour
 
         // 플레이어 카드 선택 일단 보류
         // 프로토타입이라 일단 리스트 가져오겟슴
+        PlayerMObj = Instantiate(Resources.Load("Card/Temp", typeof(GameObject))) as GameObject;
+        AnotherMObj = Instantiate(Resources.Load("Card/Temp", typeof(GameObject))) as GameObject;
+        for(int i = 0; i < 5; i++)
+        {
+            PlayerLObj[i] = Instantiate(Resources.Load("Card/Temp", typeof(GameObject))) as GameObject;
+            AnotherLObj[i] = Instantiate(Resources.Load("Card/Temp", typeof(GameObject))) as GameObject;
+        }
+        PlayerMObj.transform.parent = GameObject.Find("Cards").transform;
+        PlayerMObj.transform.localScale = new Vector3(120.0f, 180.0f, 0.0f);
+
         //Player_List = CardManager.getInstance.Player_Card;
         //Another_List = CardManager.getInstance.Another_Card;
     }

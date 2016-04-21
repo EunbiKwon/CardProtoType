@@ -6,21 +6,25 @@ using System.Xml; // Xml
 public class CardManager : MonoBehaviour
 {
     // Singleton
-    /*
     private static CardManager instance;
-
-    public static CardManager getInstance
+    public static CardManager Instance
     {
         get
         {
             if (instance == null)
             {
-                instance = new CardManager();
+                instance = FindObjectOfType(typeof(CardManager)) as CardManager;
             }
+
+            if (instance == null)
+            {
+                GameObject obj = new GameObject("CardManager");
+                instance = obj.AddComponent<CardManager>() as CardManager;
+            }
+
             return instance;
         }
     }
-    */
 
     public List<CardObject> Player_Card = new List<CardObject>();
     public List<CardObject> Another_Card = new List<CardObject>();  // Temp
